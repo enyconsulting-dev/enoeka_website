@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #f2a7c3;
+  --pink-deep: #c97aa0;
+  --pink-light: #fdf0f6;
+  --pink-mid: #fad4e8;
+  --gold: #c9a84c;
+  --gold-dark: #a07830;
+  --gold-light: #fbf5e6;
+  --warm-white: #fefcfb;
+  --cream: #fdf8f5;
+  --char: #1a1a1a;
+  --mid: #444444;
+  --muted: #888888;
+  --border: #f0d8e8;
+  --navy: #073b6a;
+  --orchid: #96088e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-warm-white text-char font-sans font-light antialiased overflow-x-hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
