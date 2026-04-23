@@ -38,10 +38,10 @@ export function ContactForm() {
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
       message: String(fd.get("message") ?? ""),
-      source: "enoeka.com/contact",
+      source: "contact_inquiry",
     };
     try {
-      const res = await fetch("/api/ghl", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

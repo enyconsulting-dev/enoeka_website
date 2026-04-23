@@ -102,10 +102,7 @@ export default function SpeakingPage() {
             Speaking <em className="text-pink-deep not-italic">Inquiry</em>
           </SectionHeading>
           <PinkRule />
-          <p className="mt-4 text-sm text-mid">
-            Tag: <code className="rounded bg-pink-light px-1">enoeka_speaker_inquiry</code> via
-            GoHighLevel.
-          </p>
+          
           <div className="mt-8 max-w-2xl">
             <SpeakingInquiryForm />
           </div>
@@ -116,8 +113,7 @@ export default function SpeakingPage() {
             Speaker Booking Consultation
           </h2>
           <p className="mt-2 text-sm text-mid">
-            30-minute discovery call — embed your Calendly URL in{" "}
-            <code className="rounded bg-pink-light px-1">NEXT_PUBLIC_CALENDLY_SPEAKER</code>.
+            30-minute discovery call
           </p>
           <div className="mt-4">
             <CalendlyEmbed variant="speaker" />

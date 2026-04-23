@@ -19,10 +19,10 @@ export function NewsletterForm() {
       tag: ghlTags.newsletter,
       firstName: String(fd.get("firstName") ?? ""),
       email: String(fd.get("email") ?? ""),
-      source: "enoeka.com",
+      source: "newsletter_signup",
     };
     try {
-      const res = await fetch("/api/ghl", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

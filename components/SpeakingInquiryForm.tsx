@@ -27,10 +27,10 @@ export function SpeakingInquiryForm() {
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
       notes: String(fd.get("notes") ?? ""),
-      source: "enoeka.com/speaking",
+      source: "Eno website",
     };
     try {
-      const res = await fetch("/api/ghl", {
+      const res = await fetch("/api/speaking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
