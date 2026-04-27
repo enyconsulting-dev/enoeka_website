@@ -17,12 +17,15 @@ export function NewsletterForm() {
     const fd = new FormData(e.currentTarget);
     const payload = {
       tag: ghlTags.newsletter,
-      firstName: String(fd.get("firstName") ?? ""),
+      inquiryType: "Newsletter Signup",
+      name: String(fd.get("firstName") ?? ""),
       email: String(fd.get("email") ?? ""),
+      phone: "",
+      message: "",
       source: "newsletter_signup",
     };
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { PressDownloads } from "@/components/PressDownloads";
 import { press } from "@/lib/copy";
 import { site } from "@/lib/site";
 
@@ -40,22 +41,7 @@ export default function PressPage() {
             Press kit <em className="text-pink-deep not-italic">downloads</em>
           </SectionHeading>
           <PinkRule />
-          <ul className="mt-8 space-y-4">
-            {press.downloads.map((d) => (
-              <li key={d.label}>
-                <button
-                  type="button"
-                  className="block w-full rounded-xl border border-border bg-white px-6 py-4 text-left transition hover:-translate-y-1 hover:shadow-md"
-                >
-                  <span className="font-semibold text-char">{d.label}</span>
-                  <span className="mt-1 block text-sm text-muted">{d.note}</span>
-                  <span className="mt-2 text-[12px] font-semibold text-pink-deep">
-                    Assets pending — link when hosted
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
+          <PressDownloads />
         </section>
 
         <section className="mt-16">

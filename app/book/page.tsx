@@ -22,16 +22,18 @@ export default function BookPage() {
         <div className="mt-12 grid gap-12 lg:grid-cols-[280px_1fr] lg:items-start">
           <div className="flex justify-center lg:sticky lg:top-28">
             <div className="w-[240px] -rotate-2 rounded-lg bg-gradient-to-br from-pink-deep to-[#8B4F72] p-10 text-center text-white shadow-xl">
-              <p className="font-display text-lg font-bold italic">{book.title}</p>
-              <p className="mt-4 text-[11px] opacity-80">{book.subtitle}</p>
-              <p className="mt-6 text-sm font-semibold">Eno Eka</p>
+              <img
+                src="https://businessanalysisschool.com/six-figure.webp"
+                alt="The Six-Figure Business Analyst book cover"
+                className="w-full h-auto"
+              />
             </div>
           </div>
           <div>
             <p className="text-mid">Practical, story-driven, and immediately applicable.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="https://www.amazon.com"
+                href="https://www.amazon.com/dp/1738168301?ref_=cm_sw_r_cp_ud_dp_RYZ4H00E0M0NFJM74WRF"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full bg-gold px-8 py-3 text-sm font-semibold text-char transition hover:bg-gold-dark"

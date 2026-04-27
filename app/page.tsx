@@ -6,6 +6,44 @@ import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { TickerStrip } from "@/components/TickerStrip";
 import { home } from "@/lib/copy";
 import { ecosystem } from "@/lib/site";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Eno Eka | International Keynote Speaker, Author & Educator | Home",
+  description:
+    "Welcome to Eno Eka's official website. Discover her journey from Nigerian immigrant to Canada's Most Powerful Women winner. Book Eno for keynote speeches, explore her bestselling book 'The Six-Figure Business Analyst', and access professional development resources.",
+  keywords: [
+    "Eno Eka",
+    "keynote speaker Canada",
+    "business analyst career",
+    "immigrant success story",
+    "women in business",
+    "professional training",
+    "career coaching",
+    "business analysis certification",
+    "ENY Consulting",
+    "The Six-Figure Business Analyst book",
+  ],
+  openGraph: {
+    title: "Eno Eka | International Keynote Speaker, Author & Educator",
+    description:
+      "Eno Eka: Award-winning speaker, author, and coach. From immigrant to mogul in 5 years. Book Eno or explore her resources.",
+    images: [
+      {
+        url: "/image.png",
+        width: 1200,
+        height: 630,
+        alt: "Eno Eka - Keynote Speaker and Author",
+      },
+    ],
+  },
+  twitter: {
+    title: "Eno Eka | International Keynote Speaker, Author & Educator",
+    description:
+      "Discover Eno Eka: Canada's Top 100 Most Powerful Women, bestselling author, and international speaker. #EnoEka #KeynoteSpeaker",
+    images: ["/image.png"],
+  },
+};
 
 export default function HomePage() {
   return (
@@ -284,13 +322,11 @@ export default function HomePage() {
           <div className="mt-10 grid gap-12 lg:grid-cols-[300px_1fr] lg:items-center">
             <div className="flex justify-center">
               <div className="w-[220px] -rotate-2 cursor-pointer rounded-lg bg-gradient-to-br from-pink-deep to-[#8B4F72] p-8 text-center text-white shadow-xl transition hover:rotate-0 hover:shadow-2xl">
-                <p className="font-display text-base font-bold italic leading-snug">
-                  The Six-Figure Business Analyst
-                </p>
-                <p className="mt-2 text-[9px] font-medium uppercase tracking-wide opacity-80">
-                  12 Simple Steps to Kickstart Your Career
-                </p>
-                <p className="mt-3 text-[12px] font-semibold opacity-90">Eno Eka</p>
+                <img
+                  src="https://businessanalysisschool.com/six-figure.webp"
+                  alt="The Six-Figure Business Analyst book cover"
+                  className="w-full h-auto"
+                />
               </div>
             </div>
             <div className="text-[15px] leading-[1.85] text-mid">
