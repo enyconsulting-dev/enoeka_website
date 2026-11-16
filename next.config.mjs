@@ -9,7 +9,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "enyconsulting-landingpage.vercel.app",
-        pathname: "/**",
+        pathname: "/Eno.jpg",
+        search: "",
       },
     ],
   },

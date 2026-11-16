@@ -39,6 +39,7 @@ export function ContactForm() {
       phone: String(fd.get("phone") ?? ""),
       message: String(fd.get("message") ?? ""),
       source: "contact_inquiry",
+      consent: true,
     };
     try {
       const res = await fetch("/api/contact", {

@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 /**
  * Booking widget embed.
  * Uses custom booking widget for both discovery and speaker variants.
@@ -12,7 +14,10 @@ export function CalendlyEmbed({ variant }: { variant: "discovery" | "speaker" })
         id="hc4DtRcp7YsHJV3Mrln7_1776943313164"
       />
       <br />
-      <script src="https://link.enyconsulting.ca/js/form_embed.js" type="text/javascript" />
+      <Script
+        src="https://link.enyconsulting.ca/js/form_embed.js"
+        strategy="afterInteractive"
+      />
     </div>
   );
 }

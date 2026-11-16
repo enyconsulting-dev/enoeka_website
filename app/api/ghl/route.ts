@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createContactSubmissionPayload } from "@/lib/contact-submission";
 
 /**
  * Forwards JSON payloads to GoHighLevel inbound webhook.
@@ -20,10 +21,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
+  const payload = createContactSubmissionPayload(body);
+  if (!payload) {
+    return NextResponse.json(
+      { ok: false, error: "Invalid form data or consent" },
+      { status: 400 }
+    );
+  }
+
   const res = await fetch(webhook, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {

@@ -28,6 +28,7 @@ export function SpeakingInquiryForm() {
       phone: String(fd.get("phone") ?? ""),
       notes: String(fd.get("notes") ?? ""),
       source: "Eno website",
+      consent: true,
     };
     try {
       const res = await fetch("/api/speaking", {

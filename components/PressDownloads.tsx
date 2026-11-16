@@ -29,6 +29,7 @@ export function PressDownloads() {
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
       source: "press_download",
+      consent: true,
     };
     try {
       const res = await fetch("/api/contact", {

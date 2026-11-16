@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ghlTags } from "@/lib/copy";
 
 export function NewsletterForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
@@ -16,16 +15,12 @@ export function NewsletterForm() {
     setStatus("loading");
     const fd = new FormData(e.currentTarget);
     const payload = {
-      tag: ghlTags.newsletter,
-      inquiryType: "Newsletter Signup",
       name: String(fd.get("firstName") ?? ""),
       email: String(fd.get("email") ?? ""),
-      phone: "",
-      message: "",
-      source: "newsletter_signup",
+      consent: true,
     };
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -41,7 +36,7 @@ export function NewsletterForm() {
   if (status === "ok") {
     return (
       <p className="rounded-2xl border border-white/20 bg-white/10 p-8 text-center text-white">
-        You&apos;re in. Watch your inbox for Eno&apos;s next insights.
+        Check your inbox to confirm your subscription to Eno&apos;s insights.
       </p>
     );
   }
@@ -102,7 +97,7 @@ export function NewsletterForm() {
       </p>
       {status === "err" && (
         <p className="mt-3 text-center text-[12px] text-red-200">
-          Could not submit — check consent or try again. Ensure GHL_WEBHOOK_URL is set on the server.
+          Could not submit — check consent or try again later.
         </p>
       )}
     </form>

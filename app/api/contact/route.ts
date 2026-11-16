@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createContactSubmissionPayload } from "@/lib/contact-submission";
 import { postToWebhook } from "@/lib/webhook";
 
 /**
@@ -14,12 +15,23 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
+  const payload = createContactSubmissionPayload(body);
+  if (!payload) {
+    return NextResponse.json(
+      { ok: false, error: "Invalid form data or consent" },
+      { status: 400 }
+    );
+  }
+
   try {
-    await postToWebhook(body, webhookUrl);
+    await postToWebhook(payload, webhookUrl);
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json(
-      { ok: false, error: (error as Error).message },
+      {
+        ok: false,
+        error: error instanceof Error ? error.message : "Webhook request failed",
+      },
       { status: 502 }
     );
   }
