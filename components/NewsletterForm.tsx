@@ -17,10 +17,11 @@ export function NewsletterForm() {
     const payload = {
       name: String(fd.get("firstName") ?? ""),
       email: String(fd.get("email") ?? ""),
+      source: "newsletter_signup",
       consent: true,
     };
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -36,7 +37,7 @@ export function NewsletterForm() {
   if (status === "ok") {
     return (
       <p className="rounded-2xl border border-white/20 bg-white/10 p-8 text-center text-white">
-        Check your inbox to confirm your subscription to Eno&apos;s insights.
+        You&apos;re in. Watch your inbox for Eno&apos;s next insights.
       </p>
     );
   }

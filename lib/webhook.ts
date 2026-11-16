@@ -1,6 +1,9 @@
 /**
  * Utility function to post payload to a webhook URL.
  */
+export const ghlWebhookUrl =
+  "https://services.leadconnectorhq.com/hooks/Qum6zwDsfvHsbXiehFQR/webhook-trigger/017b860c-fa70-4444-b8e9-a789126274b8";
+
 export async function postToWebhook(payload: unknown, webhookUrl: string) {
   if (!webhookUrl) {
     throw new Error("Webhook URL is not configured");

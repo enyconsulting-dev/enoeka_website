@@ -5,7 +5,7 @@ import {
   isValidEmail,
   readBoundedString,
 } from "@/lib/input-validation";
-import { postToWebhook } from "@/lib/webhook";
+import { ghlWebhookUrl, postToWebhook } from "@/lib/webhook";
 
 const eventTypes = ["Conference", "Summit", "Corporate", "Panel", "Virtual", "Workshop"];
 
@@ -13,8 +13,6 @@ const eventTypes = ["Conference", "Summit", "Corporate", "Panel", "Virtual", "Wo
  * Handles speaking inquiry form submissions.
  */
 export async function POST(req: Request) {
-  const webhookUrl = "https://services.leadconnectorhq.com/hooks/Qum6zwDsfvHsbXiehFQR/webhook-trigger/017b860c-fa70-4444-b8e9-a789126274b8";
-
   let body: unknown;
   try {
     body = await req.json();
@@ -78,7 +76,7 @@ export async function POST(req: Request) {
   };
 
   try {
-    await postToWebhook(payload, webhookUrl);
+    await postToWebhook(payload, ghlWebhookUrl);
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json(

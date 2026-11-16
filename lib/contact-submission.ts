@@ -27,7 +27,6 @@ export function createContactSubmissionPayload(body: unknown): JsonRecord | null
   const email = readBoundedString(body, "email", 254);
   const phone = readBoundedString(body, "phone", 64, true);
   const message = readBoundedString(body, "message", 5000, true);
-  const inquiryType = readBoundedString(body, "inquiryType", 64);
 
   if (
     !name ||
@@ -39,6 +38,21 @@ export function createContactSubmissionPayload(body: unknown): JsonRecord | null
     return null;
   }
 
+  if (source === "newsletter_signup") {
+    return {
+      tag: ghlTags.newsletter,
+      inquiryType: "Newsletter Signup",
+      name,
+      email,
+      phone: "",
+      message: "",
+      source,
+      consent: true,
+      consentRecordedAt: new Date().toISOString(),
+    };
+  }
+
+  const inquiryType = readBoundedString(body, "inquiryType", 64);
   if (source === "contact_inquiry") {
     if (!inquiryType || !isInquiryType(inquiryType) || !message) return null;
 

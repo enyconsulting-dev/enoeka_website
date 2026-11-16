@@ -20,16 +20,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Newsletter double opt-in
-
-Configure these server-only environment variables:
-
-- `NEWSLETTER_WEBHOOK_URL`: GoHighLevel webhook for pending signups.
-- `NEWSLETTER_CONFIRMATION_WEBHOOK_URL`: GoHighLevel webhook that applies the active `enoeka_newsletter` tag after confirmation.
-- `NEWSLETTER_CONFIRMATION_SECRET`: a private random secret of at least 32 bytes.
-
-The pending-signup workflow must send a confirmation email using the `confirmationUrl` field and must not add the active newsletter tag or send marketing before the confirmation webhook is called. The confirmation workflow should only apply the active tag. This external GoHighLevel configuration is required for the double opt-in to work safely.
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -387,7 +387,6 @@ export const press = {
 
 export const ghlTags = {
   newsletter: "enoeka_newsletter",
-  newsletterPending: "enoeka_newsletter_pending_confirmation",
   speakerInquiry: "enoeka_speaker_inquiry",
   mediaInquiry: "enoeka_media_inquiry",
   contact: "enoeka_contact",
