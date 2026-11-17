@@ -1,23 +1,32 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieConsent } from "@/components/CookieConsent";
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/Inter-latin.woff2",
   variable: "--font-inter",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: "300 700",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
+const playfair = localFont({
+  src: [
+    {
+      path: "./fonts/PlayfairDisplay-latin.woff2",
+      style: "normal",
+      weight: "400 900",
+    },
+    {
+      path: "./fonts/PlayfairDisplay-italic-latin.woff2",
+      style: "italic",
+      weight: "400 900",
+    },
+  ],
   variable: "--font-playfair",
   display: "swap",
-  weight: ["400", "700", "900"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
