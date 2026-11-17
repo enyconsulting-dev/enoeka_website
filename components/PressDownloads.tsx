@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { press, ghlTags } from "@/lib/copy";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 const pdfs = {
   "Download headshots (hi-res)": "/EnoEka_Press_Kit.pdf",
@@ -13,10 +14,12 @@ export function PressDownloads() {
   const [selectedDownload, setSelectedDownload] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!consent) {
+    if (!consent || !turnstileToken) {
       setStatus("err");
       return;
     }
@@ -30,6 +33,7 @@ export function PressDownloads() {
       phone: String(fd.get("phone") ?? ""),
       source: "press_download",
       consent: true,
+      turnstileToken,
     };
     try {
       const res = await fetch("/api/contact", {
@@ -53,6 +57,9 @@ export function PressDownloads() {
       setStatus("idle");
     } catch {
       setStatus("err");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetKey((key) => key + 1);
     }
   }
 
@@ -128,6 +135,11 @@ export function PressDownloads() {
                   . (CASL)
                 </span>
               </label>
+              <TurnstileWidget
+                action="contact"
+                resetKey={turnstileResetKey}
+                onTokenChange={setTurnstileToken}
+              />
               <div className="flex gap-2">
                 <button
                   type="button"

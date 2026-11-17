@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ghlTags } from "@/lib/copy";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 const types = [
   "Speaking",
@@ -15,10 +16,12 @@ const types = [
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!consent) {
+    if (!consent || !turnstileToken) {
       setStatus("err");
       return;
     }
@@ -40,6 +43,7 @@ export function ContactForm() {
       message: String(fd.get("message") ?? ""),
       source: "contact_inquiry",
       consent: true,
+      turnstileToken,
     };
     try {
       const res = await fetch("/api/contact", {
@@ -52,6 +56,9 @@ export function ContactForm() {
       setStatus("ok");
     } catch {
       setStatus("err");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetKey((key) => key + 1);
     }
   }
 
@@ -122,6 +129,11 @@ export function ContactForm() {
           . (CASL)
         </span>
       </label>
+      <TurnstileWidget
+        action="contact"
+        resetKey={turnstileResetKey}
+        onTokenChange={setTurnstileToken}
+      />
       <button
         type="submit"
         disabled={status === "loading"}
@@ -131,7 +143,7 @@ export function ContactForm() {
       </button>
       {status === "err" && (
         <p className="text-sm text-red-600">
-          Please confirm consent, or try again after GHL_WEBHOOK_URL is configured.
+          Confirm consent and complete the security check, or try again.
         </p>
       )}
     </form>

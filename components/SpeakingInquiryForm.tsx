@@ -2,14 +2,17 @@
 
 import { useState } from "react";
 import { ghlTags } from "@/lib/copy";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 export function SpeakingInquiryForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!consent) {
+    if (!consent || !turnstileToken) {
       setStatus("err");
       return;
     }
@@ -29,6 +32,7 @@ export function SpeakingInquiryForm() {
       notes: String(fd.get("notes") ?? ""),
       source: "Eno website",
       consent: true,
+      turnstileToken,
     };
     try {
       const res = await fetch("/api/speaking", {
@@ -41,6 +45,9 @@ export function SpeakingInquiryForm() {
       setStatus("ok");
     } catch {
       setStatus("err");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetKey((key) => key + 1);
     }
   }
 
@@ -137,6 +144,11 @@ export function SpeakingInquiryForm() {
           . (CASL)
         </span>
       </label>
+      <TurnstileWidget
+        action="speaking"
+        resetKey={turnstileResetKey}
+        onTokenChange={setTurnstileToken}
+      />
       <button
         type="submit"
         disabled={status === "loading"}
@@ -146,7 +158,7 @@ export function SpeakingInquiryForm() {
       </button>
       {status === "err" && (
         <p className="text-sm text-red-600">
-          Confirm consent or configure GHL_WEBHOOK_URL on the server.
+          Confirm consent and complete the security check, or try again.
         </p>
       )}
     </form>

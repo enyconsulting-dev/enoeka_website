@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createContactSubmissionPayload } from "@/lib/contact-submission";
+import { verifyTurnstileRequest } from "@/lib/turnstile";
 
 /**
  * Forwards JSON payloads to GoHighLevel inbound webhook.
@@ -26,6 +27,14 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { ok: false, error: "Invalid form data or consent" },
       { status: 400 }
+    );
+  }
+
+  const turnstile = await verifyTurnstileRequest(body, "contact", req);
+  if (!turnstile.ok) {
+    return NextResponse.json(
+      { ok: false, error: turnstile.error },
+      { status: turnstile.status }
     );
   }
 

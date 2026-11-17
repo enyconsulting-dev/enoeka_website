@@ -5,6 +5,7 @@ import {
   isValidEmail,
   readBoundedString,
 } from "@/lib/input-validation";
+import { verifyTurnstileRequest } from "@/lib/turnstile";
 import { ghlWebhookUrl, postToWebhook } from "@/lib/webhook";
 
 const eventTypes = ["Conference", "Summit", "Corporate", "Panel", "Virtual", "Workshop"];
@@ -74,6 +75,14 @@ export async function POST(req: Request) {
     consent: true,
     consentRecordedAt: new Date().toISOString(),
   };
+
+  const turnstile = await verifyTurnstileRequest(body, "speaking", req);
+  if (!turnstile.ok) {
+    return NextResponse.json(
+      { ok: false, error: turnstile.error },
+      { status: turnstile.status }
+    );
+  }
 
   try {
     await postToWebhook(payload, ghlWebhookUrl);

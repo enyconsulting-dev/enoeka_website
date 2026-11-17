@@ -20,6 +20,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Cloudflare Turnstile
+
+Create a Turnstile widget for the site in Cloudflare and allow the domains where the site is deployed. In Vercel, add these environment variables to each environment that should accept form submissions, then redeploy:
+
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY`: the widget's site key. This key is public.
+- `TURNSTILE_SECRET_KEY`: the widget's secret key. Keep it server-only; do not use a `NEXT_PUBLIC_` prefix.
+
+The contact, speaking, newsletter, and press-download forms require a successful server-side Turnstile verification before data is sent to GoHighLevel. Submissions fail closed if either key is missing or Cloudflare cannot verify the token. For local development, use Cloudflare's documented test keys rather than production secrets.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 
 export function NewsletterForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "err">("idle");
   const [consent, setConsent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!consent) {
+    if (!consent || !turnstileToken) {
       setStatus("err");
       return;
     }
@@ -19,6 +22,7 @@ export function NewsletterForm() {
       email: String(fd.get("email") ?? ""),
       source: "newsletter_signup",
       consent: true,
+      turnstileToken,
     };
     try {
       const res = await fetch("/api/contact", {
@@ -31,6 +35,9 @@ export function NewsletterForm() {
       setStatus("ok");
     } catch {
       setStatus("err");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetKey((key) => key + 1);
     }
   }
 
@@ -84,6 +91,11 @@ export function NewsletterForm() {
           . (CASL)
         </span>
       </label>
+      <TurnstileWidget
+        action="contact"
+        resetKey={turnstileResetKey}
+        onTokenChange={setTurnstileToken}
+      />
       <button
         type="submit"
         disabled={status === "loading"}
@@ -98,7 +110,7 @@ export function NewsletterForm() {
       </p>
       {status === "err" && (
         <p className="mt-3 text-center text-[12px] text-red-200">
-          Could not submit — check consent or try again later.
+          Could not submit — confirm consent, complete the security check, or try again.
         </p>
       )}
     </form>
