@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { PressDownloads } from "@/components/PressDownloads";
 import { press } from "@/lib/copy";
+import { createPageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Eno Eka | Press & Media Kit | Speaker, Author & Thought Leader",
+export const metadata = createPageMetadata({
+  title: "Press and Media Kit | Eno Eka",
+  pathname: "/press",
   description:
     "Download Eno Eka's press kit, headshots, and speaker fact sheet. Featured on CTV, ABC, FOX, Forbes, and Channels TV. Media inquiries welcome.",
-};
+});
 
 export default function PressPage() {
   return (

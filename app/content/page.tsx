@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { ContentHubClient } from "@/components/ContentHubClient";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Content by Eno Eka | YouTube, Podcast, Masterclasses & Blog | enoeka.com",
+export const metadata = createPageMetadata({
+  title: "Videos, Podcasts, and Articles | Eno Eka",
+  pathname: "/content",
   description:
     "All of Eno Eka's content in one place — YouTube videos, Fireside Chat podcast episodes, masterclasses, blog articles, and media features. Filter by topic.",
-};
+});
 
 export default function ContentHubPage() {
   return (
