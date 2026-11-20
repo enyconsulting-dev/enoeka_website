@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
+export const metadata = createPageMetadata({
+  title: "Privacy Policy | Eno Eka",
   description: "How Eno Eka and enoeka.com collect, use, and protect your information.",
-};
+  pathname: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

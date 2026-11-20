@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { createPageMetadata } from "@/lib/seo";
 import { podcast } from "@/lib/copy";
 
-export const metadata: Metadata = {
-  title: "Fireside Chat With Eno | Podcast | Apple Podcasts & Spotify",
+export const metadata = createPageMetadata({
+  title: "Fireside Chat with Eno | Podcast",
+  pathname: "/podcast",
   description:
     "51 episodes on career success, business analysis, entrepreneurship, and navigating life as a professional immigrant in Canada. Hosted by Eno Eka.",
-};
+});
 
 export default function PodcastPage() {
   return (

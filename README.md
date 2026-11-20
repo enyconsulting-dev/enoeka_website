@@ -29,6 +29,13 @@ Create a Turnstile widget for the site in Cloudflare and allow the domains where
 
 The contact, speaking, newsletter, and press-download forms require a successful server-side Turnstile verification before data is sent to GoHighLevel. Submissions fail closed if either key is missing or Cloudflare cannot verify the token. For local development, use Cloudflare's documented test keys rather than production secrets.
 
+## Search engine and AI discovery
+
+- `app/robots.ts` serves `/robots.txt` and points crawlers to the generated `/sitemap.xml`.
+- `app/sitemap.ts` lists the site's public pages.
+- `public/llms.txt` and `public/llm.txt` provide machine-readable site summaries for AI tools.
+- Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to the verification token from Google Search Console before deploying. The placeholder token is intentionally omitted when the variable is unset.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

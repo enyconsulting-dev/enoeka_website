@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 import { masterclasses } from "@/lib/copy";
 
-export const metadata: Metadata = {
-  title: "Masterclasses & Training | Eno Eka",
+export const metadata = createPageMetadata({
+  title: "Masterclasses and Training | Eno Eka",
+  pathname: "/masterclasses",
   description:
     "Masterclasses and workshops across ENY schools — enrollment links open in new tabs to BAS, BCS, and TLBS.",
-};
+});
 
 export default function MasterclassesPage() {
   return (
