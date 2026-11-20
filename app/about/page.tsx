@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { IconDiamond } from "@/components/icons";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { about } from "@/lib/copy";
+import { createPageMetadata } from "@/lib/seo";
 import { ecosystem } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About Eno Eka | Nigeria to Canada — Speaker, Author, CEO | ENY Consulting",
+export const metadata = createPageMetadata({
+  title: "About Eno Eka | Speaker, Author, and Founder",
+  pathname: "/about",
   description:
     "From Nigerian immigrant to Canada's Most Powerful Women Top 100. Eno Eka's full story — career, awards, mission, and the journey that built a multi-continental brand.",
-};
+});
 
 export default function AboutPage() {
   return (

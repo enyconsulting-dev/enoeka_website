@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Eno Eka YouTube Channel | Business Analysis, Career & Consulting Videos",
+export const metadata = createPageMetadata({
+  title: "Eno Eka Videos | Business Analysis and Career",
+  pathname: "/youtube",
   description:
     "Watch Eno Eka's latest videos on business analysis careers, consulting, AI, digital transformation, and building a six-figure income. Subscribe for weekly insights.",
-};
+});
 
 const playlists = [
   "Business Analysis",

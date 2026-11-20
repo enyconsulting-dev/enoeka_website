@@ -6,10 +6,11 @@ import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { TickerStrip } from "@/components/TickerStrip";
 import { home } from "@/lib/copy";
 import { ecosystem } from "@/lib/site";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Eno Eka | International Keynote Speaker, Author & Educator | Home",
+export const metadata = createPageMetadata({
+  title: "Eno Eka | International Keynote Speaker, Author & Educator",
+  pathname: "/",
   description:
     "Welcome to Eno Eka's official website. Discover her journey from Nigerian immigrant to Canada's Most Powerful Women winner. Book Eno for keynote speeches, explore her bestselling book 'The Six-Figure Business Analyst', and access professional development resources.",
   keywords: [
@@ -24,26 +25,7 @@ export const metadata: Metadata = {
     "ENY Consulting",
     "The Six-Figure Business Analyst book",
   ],
-  openGraph: {
-    title: "Eno Eka | International Keynote Speaker, Author & Educator",
-    description:
-      "Eno Eka: Award-winning speaker, author, and coach. From immigrant to mogul in 5 years. Book Eno or explore her resources.",
-    images: [
-      {
-        url: "/image.png",
-        width: 1200,
-        height: 630,
-        alt: "Eno Eka - Keynote Speaker and Author",
-      },
-    ],
-  },
-  twitter: {
-    title: "Eno Eka | International Keynote Speaker, Author & Educator",
-    description:
-      "Discover Eno Eka: Canada's Top 100 Most Powerful Women, bestselling author, and international speaker. #EnoEka #KeynoteSpeaker",
-    images: ["/image.png"],
-  },
-};
+});
 
 export default function HomePage() {
   return (

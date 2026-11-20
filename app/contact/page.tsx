@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { ContactForm } from "@/components/ContactForm";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 import { site, socialLinks } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact Eno Eka | Booking, Media & Business Inquiries | enoeka.com",
+export const metadata = createPageMetadata({
+  title: "Contact Eno Eka | Booking, Media, and Business Inquiries",
+  pathname: "/contact",
   description:
     "Reach Eno Eka for speaking bookings, media collaborations, business partnerships, and community inquiries. Response within 3 business days.",
-};
+});
 
 export default function ContactPage() {
   return (

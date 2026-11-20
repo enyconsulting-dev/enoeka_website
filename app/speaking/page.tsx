@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
 import { SpeakingInquiryForm } from "@/components/SpeakingInquiryForm";
+import { createPageMetadata } from "@/lib/seo";
 import { speaking } from "@/lib/copy";
 
-export const metadata: Metadata = {
-  title: "Book Eno Eka to Speak | International Keynote Speaker | Canada · USA · Nigeria",
+export const metadata = createPageMetadata({
+  title: "Book Eno Eka to Speak | Keynote Speaker",
+  pathname: "/speaking",
   description:
     "Book Eno Eka for your next conference, summit, or corporate event. Award-winning speaker on business analysis, digital transformation, personal brand, AI, and entrepreneurship.",
-};
+});
 
 export default function SpeakingPage() {
   return (

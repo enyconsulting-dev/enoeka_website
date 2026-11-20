@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieConsent } from "@/components/CookieConsent";
+import { site } from "@/lib/site";
 
 const inter = localFont({
   src: "./fonts/Inter-latin.woff2",
@@ -30,9 +31,9 @@ const playfair = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://enoeka.com"),
+  metadataBase: new URL(site.url),
   title: {
-    default: "Eno Eka | International Keynote Speaker, Author & Educator | enoeka.com",
+    default: "Eno Eka | International Keynote Speaker, Author & Educator",
     template: "%s | Eno Eka",
   },
   description:
@@ -67,15 +68,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_CA",
-    siteName: "Eno Eka",
+    siteName: site.name,
     title: "Eno Eka | International Keynote Speaker, Author & Educator",
     description:
       "Discover Eno Eka: Award-winning speaker, bestselling author, and career coach. Book Eno for your next event or explore her resources for professional growth.",
     images: [
       {
         url: "/image.png",
-        width: 1200,
-        height: 630,
+        width: 828,
+        height: 1023,
         alt: "Eno Eka - Keynote Speaker and Author",
       },
     ],
@@ -99,9 +100,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-site-verification-code", // Replace with actual code
-  },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
@@ -117,47 +118,61 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Eno Eka",
-              jobTitle: "International Keynote Speaker, Author, Educator",
-              description: "Eno Eka is an international keynote speaker, author of 'The Six-Figure Business Analyst', and founder of ENY Consulting. She has trained over 100,000 professionals and is recognized as one of Canada's Most Powerful Women.",
-              url: "https://enoeka.com",
-              sameAs: [
-                "https://www.linkedin.com/in/enoeka",
-                "https://twitter.com/misspragmatic",
-                "https://www.instagram.com/misspragmatic",
-              ],
-              knowsAbout: [
-                "Business Analysis",
-                "Career Development",
-                "Professional Training",
-                "Keynote Speaking",
-                "Entrepreneurship",
-                "Women in Tech",
-                "Immigrant Success Stories",
-              ],
-              hasOccupation: {
-                "@type": "Occupation",
-                name: "Keynote Speaker and Career Coach",
-                occupationLocation: {
-                  "@type": "Country",
-                  name: "Canada",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": `${site.url}/#website`,
+                  url: site.url,
+                  name: site.name,
+                  inLanguage: "en-CA",
+                  mainEntity: { "@id": `${site.url}/#person` },
                 },
-              },
-              award: [
-                "Canada's Most Powerful Women Top 100 (2022)",
-                "Forbes 30 Under 30 Nominee",
-                "Millionaire Mogul Award",
+                {
+                  "@type": "Person",
+                  "@id": `${site.url}/#person`,
+                  name: site.name,
+                  url: site.url,
+                  image: `${site.url}/image.png`,
+                  jobTitle: "International keynote speaker, author, and educator",
+                  description:
+                    "Eno Eka is an international keynote speaker, author of The Six-Figure Business Analyst, and educator who has trained more than 100,000 professionals.",
+                  sameAs: [
+                    "https://www.linkedin.com/in/enoeka",
+                    "https://twitter.com/misspragmatic",
+                    "https://www.instagram.com/misspragmatic",
+                  ],
+                  knowsAbout: [
+                    "Business analysis",
+                    "Career development",
+                    "Professional training",
+                    "Keynote speaking",
+                    "Entrepreneurship",
+                    "Women in technology",
+                  ],
+                  hasOccupation: {
+                    "@type": "Occupation",
+                    name: "Keynote speaker and career coach",
+                    occupationLocation: {
+                      "@type": "Country",
+                      name: "Canada",
+                    },
+                  },
+                  award: [
+                    "Canada's Most Powerful Women Top 100 (2022)",
+                    "Forbes 30 Under 30 Nominee",
+                    "Millionaire Mogul Award",
+                  ],
+                  alumniOf: {
+                    "@type": "EducationalOrganization",
+                    name: "University of Calgary",
+                  },
+                  nationality: {
+                    "@type": "Country",
+                    name: "Canada",
+                  },
+                },
               ],
-              alumniOf: {
-                "@type": "EducationalOrganization",
-                name: "University of Calgary",
-              },
-              nationality: {
-                "@type": "Country",
-                name: "Canada",
-              },
-            }),
+            }).replace(/</g, "\\u003c"),
           }}
         />
       </head>
