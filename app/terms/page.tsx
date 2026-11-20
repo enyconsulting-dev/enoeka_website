@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Terms of Service",
+export const metadata = createPageMetadata({
+  title: "Terms of Service | Eno Eka",
   description: "Terms of use for enoeka.com.",
-};
+  pathname: "/terms",
+});
 
 export default function TermsPage() {
   return (

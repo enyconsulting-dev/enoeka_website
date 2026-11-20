@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 import { ecosystem } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Work With Eno Eka | Speaking, Schools & Consulting | enoeka.com",
+export const metadata = createPageMetadata({
+  title: "Work with Eno Eka | Speaking and Consulting",
+  pathname: "/work-with-me",
   description:
     "Book Eno to speak, enroll in an ENY school, hire ENY Consulting, or explore thought leadership advisory. All ways to work with Eno Eka in one place.",
-};
+});
 
 export default function WorkWithMePage() {
   return (

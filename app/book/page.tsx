@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, PinkRule, SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/seo";
 import { book } from "@/lib/copy";
 
-export const metadata: Metadata = {
-  title: "The Six-Figure Business Analyst | Book by Eno Eka | 12 Simple Steps",
+export const metadata = createPageMetadata({
+  title: "The Six-Figure Business Analyst | Eno Eka",
+  pathname: "/book",
   description:
     "Order Eno Eka's bestselling book — 12 simple steps to kickstart your business analysis career without a tech degree or experience.",
-};
+});
 
 export default function BookPage() {
   return (
