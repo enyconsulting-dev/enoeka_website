@@ -23,14 +23,14 @@ export default function PodcastPage() {
           <PinkRule />
           <p className="mt-4 max-w-2xl text-mid">{podcast.blurb}</p>
           <p className="mt-2 text-sm text-muted">
-            Site:{" "}
+            Listen:{" "}
             <a
-              href="https://firesidechatwitheno.com"
+              href="https://open.spotify.com/show/6xGnxzSqv7nfClXsN1K3gy?si=gn9R_5e3SwK3bx9tKDdIaQ"
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-pink-deep underline"
             >
-              firesidechatwitheno.com
+              Open on Spotify
             </a>
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
